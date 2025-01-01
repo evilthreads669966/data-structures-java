@@ -1,8 +1,11 @@
 package com.evilthreads.lists;
+
 import com.evilthreads.Node;
 import com.evilthreads.SortingType;
+import com.evilthreads.iterators.LinkedIterator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
 import java.util.*;
 
 final public class LinkedList<T extends Comparable<T>> implements List<T>, Comparable<LinkedList<T>> {
@@ -1202,7 +1205,7 @@ final public class LinkedList<T extends Comparable<T>> implements List<T>, Compa
     @NotNull
     @Override
     public Iterator<T> iterator() {
-        return new LinkedListIterator<T>(head);
+        return new LinkedIterator<T>(head);
     }
 
     @Override
@@ -1266,27 +1269,6 @@ final public class LinkedList<T extends Comparable<T>> implements List<T>, Compa
         @Override
         public String toString() {
             return "(" + first + ", " + second + ")";
-        }
-    }
-
-    static final private class LinkedListIterator<T extends Comparable<T>> implements Iterator<T> {
-        @Nullable
-        private Node<T> current;
-
-        public LinkedListIterator(final @Nullable Node<T> node) {
-            current = node;
-        }
-
-        @Override
-        public boolean hasNext() {
-            return current != null;
-        }
-
-        @Override
-        public T next() {
-            final T value = current.value;
-            current = current.next;
-            return value;
         }
     }
 
