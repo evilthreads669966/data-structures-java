@@ -1,3 +1,4 @@
+import com.evilthreads.SortingType;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,7 +9,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LinkedListTest {
-    private final LinkedList<Integer> list = new LinkedList<>();
+    private final com.evilthreads.lists.LinkedList<Integer> list = new com.evilthreads.lists.LinkedList<>();
 
     @BeforeEach
     void setUp() {
@@ -327,7 +328,7 @@ public class LinkedListTest {
 
     @Test
     void testCompareTo() {
-        final LinkedList<Integer> values = new LinkedList<>();
+        final com.evilthreads.lists.LinkedList<Integer> values = new com.evilthreads.lists.LinkedList<>();
         values.push(1);
         assertEquals(1, list.compareTo(values));
 
@@ -341,10 +342,10 @@ public class LinkedListTest {
         values.add("a");
         values.add("b");
         values.add("c");
-        final List<LinkedList.Pair<Integer, String>> pairs = list.zip(values);
+        final List<com.evilthreads.lists.LinkedList.Pair<Integer, String>> pairs = list.zip(values);
 
         assertEquals(3, pairs.size());
-        assertEquals(new LinkedList.Pair(5, "a"), pairs.get(0));
+        assertEquals(new com.evilthreads.lists.LinkedList.Pair(5, "a"), pairs.get(0));
     }
 
     @Test
@@ -370,7 +371,7 @@ public class LinkedListTest {
 
     @Test
     void testFlatMap(){
-        LinkedList<Box<Integer>> linkedList = new LinkedList<>();
+        com.evilthreads.lists.LinkedList<Box<Integer>> linkedList = new com.evilthreads.lists.LinkedList<>();
         linkedList.add(new Box(Arrays.asList(1,2,3)));
         linkedList.add(new Box(Arrays.asList(4,5,6)));
 
@@ -475,12 +476,12 @@ public class LinkedListTest {
 
     @Test
     void testLinkedListConstructor() {
-        final LinkedList<Integer> linkedList = new LinkedList<>(1, 2, 3);
+        final com.evilthreads.lists.LinkedList<Integer> linkedList = new com.evilthreads.lists.LinkedList<>(1, 2, 3);
         assertEquals(3, linkedList.size());
         assertEquals(3, linkedList.last());
         assertEquals(1, linkedList.first());
 
-        final LinkedList<Integer> emptyList = new LinkedList<>();
+        final com.evilthreads.lists.LinkedList<Integer> emptyList = new com.evilthreads.lists.LinkedList<>();
         assertEquals(0, emptyList.size());
         assertThrows(NoSuchElementException.class, () -> emptyList.pop());
         assertThrows(NoSuchElementException.class, () -> emptyList.last());
@@ -493,7 +494,7 @@ public class LinkedListTest {
         values.add(2);
         values.add(3);
 
-        final LinkedList<Integer> newList = LinkedList.fromIterable(values);
+        final com.evilthreads.lists.LinkedList<Integer> newList = com.evilthreads.lists.LinkedList.fromIterable(values);
         assertEquals(3, newList.size());
         assertIterableEquals(values, newList);
     }
@@ -580,15 +581,15 @@ public class LinkedListTest {
         list.push(0);
         list.add(20);
         list.add(-1);
-        list.selectionSort(LinkedList.SortingType.ASCENDING);
+        list.selectionSort(SortingType.ASCENDING);
         assertEquals(-1, list.peek());
         assertEquals(20, list.last());
     }
 
     @Test
     void testBubbleSort(){
-        LinkedList<Integer> values = new LinkedList<>(3,2,4,5,1);
-        values.bubbleSort(LinkedList.SortingType.ASCENDING);
+        com.evilthreads.lists.LinkedList<Integer> values = new com.evilthreads.lists.LinkedList<>(3,2,4,5,1);
+        values.bubbleSort(SortingType.ASCENDING);
         assertEquals(5, values.size());
 
         int value = 1;
@@ -598,8 +599,8 @@ public class LinkedListTest {
             value++;
         }
 
-        values = new LinkedList<>(3,2,4,5,1);
-        values.bubbleSort(LinkedList.SortingType.DESCENDING);
+        values = new com.evilthreads.lists.LinkedList<>(3,2,4,5,1);
+        values.bubbleSort(SortingType.DESCENDING);
         value = 5;
         for(int v : values) {
             assertEquals(value, v);

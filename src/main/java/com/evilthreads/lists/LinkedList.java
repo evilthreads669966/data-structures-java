@@ -1,6 +1,8 @@
+package com.evilthreads.lists;
+import com.evilthreads.Node;
+import com.evilthreads.SortingType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.*;
 
 final public class LinkedList<T extends Comparable<T>> implements List<T>, Comparable<LinkedList<T>> {
@@ -45,7 +47,7 @@ final public class LinkedList<T extends Comparable<T>> implements List<T>, Compa
     }
 
     @NotNull
-    LinkedList<T> copy(){
+    public LinkedList<T> copy(){
         final LinkedList<T> list = new LinkedList<>();
         list.addAll(this);
         return list;
@@ -307,7 +309,7 @@ final public class LinkedList<T extends Comparable<T>> implements List<T>, Compa
             if(idx == index){
                 final T value = curr.value;
                 prev.next = curr.next;
-                size    --;
+                size--;
 
                 return value;
             }
@@ -529,7 +531,6 @@ final public class LinkedList<T extends Comparable<T>> implements List<T>, Compa
             return max;
         }
 
-
         Node<T> curr = head.next;
 
         while(curr != null){
@@ -622,7 +623,6 @@ final public class LinkedList<T extends Comparable<T>> implements List<T>, Compa
 
         Node<T> curr = head;
         S accumulator = initial;
-
 
         while(curr != null){
             accumulator = operation.call(accumulator, curr.value);
@@ -855,7 +855,7 @@ final public class LinkedList<T extends Comparable<T>> implements List<T>, Compa
     }
 
     @NotNull
-    List<T> drop(final int n) throws IllegalArgumentException{
+    public List<T> drop(final int n) throws IllegalArgumentException{
         if(n < 0){
             throw new IllegalArgumentException();
         }
@@ -1215,11 +1215,6 @@ final public class LinkedList<T extends Comparable<T>> implements List<T>, Compa
         return null;
     }
 
-    public enum SortingType{
-        ASCENDING,
-        DESCENDING,
-    }
-
     static final public class Pair<T, S>{
         @NotNull
         private T first;
@@ -1292,41 +1287,6 @@ final public class LinkedList<T extends Comparable<T>> implements List<T>, Compa
             final T value = current.value;
             current = current.next;
             return value;
-        }
-    }
-
-    static final private class Node<T extends Comparable<T>> implements Comparable<Node<T>>{
-        @NotNull
-        private T value;
-        @Nullable
-        private Node<T> next;
-
-        public Node(@NotNull T value){
-            this.value = value;
-            this.next = null;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if(this == obj){
-                return true;
-            }
-            if(obj == null){
-                return false;
-            }
-            if(!(obj instanceof Node)){
-                return false;
-            }
-            final Node<T> other = (Node<T>) obj;
-            if(this.next.equals(other.next) && this.value.equals(other.value)){
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public int compareTo(@NotNull LinkedList.Node<T> other) {
-            return value.compareTo(other.value);
         }
     }
 
