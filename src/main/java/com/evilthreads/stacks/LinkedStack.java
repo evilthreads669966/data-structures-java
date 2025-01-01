@@ -2,11 +2,13 @@ package com.evilthreads.stacks;
 
 import com.evilthreads.Node;
 import com.evilthreads.SortingType;
+import com.evilthreads.iterators.LinkedIterator;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinkedStack<T extends Comparable<T>>{
+public class LinkedStack<T extends Comparable<T>> implements Iterable<T>{
     private Node<T> head;
     private int size;
 
@@ -52,6 +54,38 @@ public class LinkedStack<T extends Comparable<T>>{
     public void clear(){
         head = null;
         size = 0;
+    }
+
+    public boolean contains(final T value){
+        if(isEmpty()){
+            return false;
+        }
+
+        Node<T> curr = head;
+
+        while(curr != null){
+            if(curr.value.equals(value)){
+                return true;
+            }
+
+            curr = curr.next;
+        }
+
+        return false;
+    }
+
+    public boolean containsAll(final Iterable<T> values){
+        if(isEmpty()){
+            return false;
+        }
+
+        for(final T value : values){
+            if(!contains(value)){
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public boolean isEmpty(){
@@ -118,5 +152,10 @@ public class LinkedStack<T extends Comparable<T>>{
         final T temp = left.value;
         left.value = right.value;
         right.value = temp;
+    }
+
+    @Override
+    public @NotNull Iterator<T> iterator() {
+        return new LinkedIterator<T>(head);
     }
 }

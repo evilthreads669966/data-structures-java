@@ -4,6 +4,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -94,5 +97,32 @@ public class LinkedStackTest {
     void testToString(){
         final String string = "[5 4 3 2 1]";
         assertEquals(string, stack.toString());
+    }
+
+    @Test
+    void testIterator(){
+        final Iterator<Integer> iterator = stack.iterator();
+        assertTrue(iterator.hasNext());
+        assertEquals(5, iterator.next());
+
+        iterator.next();
+        iterator.next();
+        iterator.next();
+        iterator.next();
+        assertFalse(iterator.hasNext());
+    }
+
+    @Test
+    void testContains(){
+        assertTrue(stack.contains(5));
+        assertFalse(stack.contains(6));
+    }
+
+    @Test
+    void testContainsAll(){
+        List<Integer> values = Arrays.asList(1,3,5);
+        assertTrue(stack.containsAll(values));
+        values = Arrays.asList(1,2,3,6);
+        assertFalse(stack.containsAll(values));
     }
 }
