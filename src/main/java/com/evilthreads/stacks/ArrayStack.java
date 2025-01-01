@@ -1,11 +1,13 @@
 package com.evilthreads.stacks;
 
 import com.evilthreads.SortingType;
+import com.evilthreads.iterators.ArrayIterator;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayStack<T extends Comparable<T>> {
+public class ArrayStack<T extends Comparable<T>> implements Iterable<T> {
     @NotNull
     private T[] array;
     private int top;
@@ -76,6 +78,33 @@ public class ArrayStack<T extends Comparable<T>> {
         array = arr;
     }
 
+    public boolean contains(@NotNull final T value){
+        if(isEmpty())
+            return false;
+
+        for(int i = 0; i <= top; i++){
+            if(array[i].equals(value)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean containsAll(@NotNull final Iterable<T> values){
+        if(isEmpty()){
+            return false;
+        }
+
+        for(final T value : values){
+            if(!contains(value)){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public void selectionSort(){
         selectionSort(SortingType.ASCENDING);
     }
@@ -124,5 +153,10 @@ public class ArrayStack<T extends Comparable<T>> {
         sb.append(']');
 
         return sb.toString();
+    }
+
+    @Override
+    public @NotNull Iterator<T> iterator() {
+        return new ArrayIterator<T>(array);
     }
 }

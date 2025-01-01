@@ -4,7 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.NoSuchElementException;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -100,4 +100,32 @@ public class ArrayStackTest {
         final String string = "[1 2 3 4 5]";
         assertEquals(string, stack.toString());
     }
+
+    @Test
+    void testIterator(){
+        final Iterator<Integer> iterator = stack.iterator();
+        assertTrue(iterator.hasNext());
+        assertNotNull(iterator.next());
+
+        for(int i = 0; i < 4; i++){
+            iterator.next();
+        }
+
+        assertFalse(iterator.hasNext());
+    }
+
+    @Test
+    void testContains(){
+        assertTrue(stack.contains(5));
+        assertFalse(stack.contains(6));
+    }
+
+    @Test
+    void testContainsAll(){
+        List<Integer> values = Arrays.asList(1,3,5);
+        assertTrue(stack.containsAll(values));
+        values = Arrays.asList(1,2,3,6);
+        assertFalse(stack.containsAll(values));
+    }
+
 }
