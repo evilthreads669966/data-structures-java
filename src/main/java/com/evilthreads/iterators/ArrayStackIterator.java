@@ -4,23 +4,23 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 
-public class ArrayIterator<T> implements Iterator<T> {
+public class ArrayStackIterator<T> implements Iterator<T> {
     @NotNull
     private final T[] array;
-    private int index;
+    private int top;
 
-    public ArrayIterator (@NotNull final T[] array) {
+    public ArrayStackIterator(@NotNull final T[] array, final int top) {
         this.array = array;
-        this.index = -1;
+        this.top = top;
     }
 
     @Override
     public boolean hasNext() {
-        return array[index + 1] != null;
+        return top != -1;
     }
 
     @Override
     public T next() {
-        return array[++index];
+        return array[top--];
     }
 }

@@ -1,7 +1,7 @@
 package com.evilthreads.stacks;
 
 import com.evilthreads.SortingType;
-import com.evilthreads.iterators.ArrayIterator;
+import com.evilthreads.iterators.ArrayStackIterator;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
@@ -157,6 +157,6 @@ public class ArrayStack<T extends Comparable<T>> implements Iterable<T> {
 
     @Override
     public @NotNull Iterator<T> iterator() {
-        return new ArrayIterator<T>(array);
+        return new ArrayStackIterator<T>(array, top);
     }
 }
