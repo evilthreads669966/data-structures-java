@@ -73,6 +73,8 @@ public class CircularArrayQueue<T extends Comparable<T>> {
             }
         }
 
+        front = 0;
+        rear = size;
         array = arr;
     }
 
