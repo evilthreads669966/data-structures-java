@@ -1,11 +1,13 @@
 package com.evilthreads.queues;
 
+import com.evilthreads.iterators.CircularArrayIterator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.Iterator;
 
-public class CircularArrayQueue<T extends Comparable<T>> {
+public class CircularArrayQueue<T extends Comparable<T>> implements Iterable<T>{
     private T[] array;
     private int front;
     private int rear;
@@ -158,5 +160,10 @@ public class CircularArrayQueue<T extends Comparable<T>> {
         sb.append(']');
 
         return sb.toString();
+    }
+
+    @Override
+    public @NotNull Iterator<T> iterator() {
+        return new CircularArrayIterator<T>(array, front, rear);
     }
 }

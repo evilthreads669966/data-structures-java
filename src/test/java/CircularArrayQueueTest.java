@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -108,4 +109,16 @@ public class CircularArrayQueueTest {
         assertEquals(string, queue.toString());
     }
 
+    @Test
+    void testIterator(){
+        final Iterator<Integer> iterator = queue.iterator();
+        assertTrue(iterator.hasNext());
+        assertNotNull(iterator.next());
+
+        for(int i = 0; i < 4; i++){
+            iterator.next();
+        }
+
+        assertFalse(iterator.hasNext());
+    }
 }
