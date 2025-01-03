@@ -127,6 +127,36 @@ public class CircularArrayQueue<T extends Comparable<T>> implements Iterable<T>{
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if(obj == this){
+            return true;
+        }
+        if(obj == null){
+            return false;
+        }
+        if(!(obj instanceof CircularArrayQueue)){
+            return false;
+        }
+
+        CircularArrayQueue<T> other = (CircularArrayQueue<T>) obj;
+
+        if(this.size != other.size){
+            return false;
+        }
+
+        final Iterator<T> iterator = iterator();
+        final Iterator<T> otherIterator = other.iterator();
+
+        while(iterator.hasNext()){
+            if(!iterator.next().equals(otherIterator.next())){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
 

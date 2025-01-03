@@ -121,4 +121,15 @@ public class CircularArrayQueueTest {
 
         assertFalse(iterator.hasNext());
     }
+
+    @Test
+    void testEquals(){
+        final CircularArrayQueue<Integer> other = new CircularArrayQueue<>(20);
+        other.enqueue(1);
+        other.enqueue(2);
+        other.enqueue(3);
+        other.enqueue(4);
+        other.enqueue(5);
+        assertEquals(other, queue);
+    }
 }
