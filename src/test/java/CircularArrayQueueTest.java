@@ -1,3 +1,4 @@
+import com.evilthreads.SortingType;
 import com.evilthreads.queues.CircularArrayQueue;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -131,5 +132,28 @@ public class CircularArrayQueueTest {
         other.enqueue(4);
         other.enqueue(5);
         assertEquals(other, queue);
+    }
+
+    @Test
+    void testSelectionSort(){
+        queue.dequeue(); //remove 1
+        queue.dequeue(); //remove 2
+        queue.dequeue(); // remove 3
+        //queue = [4,5]
+        queue.enqueue(6);//queue = [6,4,5]
+        queue.enqueue(3);//queue = [3,6,4,5]
+        queue.enqueue(9);//queue = [9,3,6,4,5]
+
+        queue.selectionSort(SortingType.ASCENDING);
+
+        final CircularArrayQueue<Integer> other = new CircularArrayQueue<>(20);
+        other.enqueue(3);
+        other.enqueue(4);
+        other.enqueue(5);
+        other.enqueue(6);
+        other.enqueue(9);
+
+        assertEquals(other, queue);
+
     }
 }

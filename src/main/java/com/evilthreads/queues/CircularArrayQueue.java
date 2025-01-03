@@ -1,5 +1,6 @@
 package com.evilthreads.queues;
 
+import com.evilthreads.SortingType;
 import com.evilthreads.iterators.CircularArrayIterator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -124,6 +125,61 @@ public class CircularArrayQueue<T extends Comparable<T>> implements Iterable<T>{
         }
 
         return true;
+    }
+
+    public void selectionSort(@NotNull final SortingType sortingType){
+        if(isEmpty()){
+            return;
+        }
+
+        int index = front;
+
+        final int lessOrGreater;
+
+        if(sortingType == SortingType.ASCENDING){
+            lessOrGreater = 1;
+        }else{
+            lessOrGreater = -1;
+        }
+
+        for(int i = 0; i < array.length; i++){
+            if(index < rear){
+                for(int j = index + 1; j < rear; j++){
+                    if(array[index].compareTo(array[j]) == lessOrGreater){
+                        swapValues(index, j);
+                    }
+                }
+            }else if(index == array.length - 1){
+                for(int j = 0; j < rear; j++){
+                    if(array[index].compareTo(array[j]) == lessOrGreater){
+                        swapValues(index, j);
+                    }
+                }
+            } else if(index > rear){
+                for(int j = index + 1; j < array.length; j++){
+                    if(array[index].compareTo(array[j]) == lessOrGreater){
+                        swapValues(index, j);
+                    }
+                }
+                for(int j = 0; j < rear; j++){
+                    if(array[index].compareTo(array[j]) == lessOrGreater){
+                        swapValues(index, j);
+                    }
+                }
+            }
+
+            if(index == array.length - 1){
+                index = 0;
+            }else{
+                index++;
+            }
+        }
+    }
+
+    private void swapValues(final int leftIndex, final int rightIndex){
+        final T temp = array[leftIndex];
+        array[leftIndex] = array[rightIndex];
+        array[rightIndex] = temp;
     }
 
     @Override
