@@ -22,7 +22,7 @@ public class CircularArrayQueue<T extends Comparable<T>> {
         return front == rear;
     }
 
-    public void enqueue(@NotNull T value){
+    public void enqueue(@NotNull final T value){
         if(isFull()){
             resize();
         }
@@ -80,7 +80,7 @@ public class CircularArrayQueue<T extends Comparable<T>> {
         return size == array.length;
     }
 
-    public boolean contains(@NotNull T value){
+    public boolean contains(@NotNull final T value){
         if(isEmpty()){
             return false;
         }
@@ -108,7 +108,7 @@ public class CircularArrayQueue<T extends Comparable<T>> {
         return false;
     }
 
-    public boolean containsAll(@NotNull Collection<T> values){
+    public boolean containsAll(@NotNull final Collection<T> values){
         if(isEmpty()){
             return false;
         }
